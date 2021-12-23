@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -22,7 +23,7 @@ namespace venntest.Controllers
         }
 
         // GET: Product/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
@@ -47,10 +48,22 @@ namespace venntest.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Quantity,InStock")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Quantity,InStock,ImagePath")] Product product)
         {
             if (ModelState.IsValid & product.Quantity>=product.InStock)
             {
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                product.ImageFile = file;
+                
+                //save the File in the server
+                string fileName = Path.GetFileNameWithoutExtension(product.ImageFile.FileName);
+                string extension = Path.GetExtension(product.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                product.ImagePath = "~/images/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                product.ImageFile.SaveAs(fileName);
+
+
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -148,6 +148,22 @@
     <Compile Include="Migrations\202112231611152_PriceType.Designer.cs">
       <DependentUpon>202112231611152_PriceType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112231826003_ImageFiles.cs" />
+    <Compile Include="Migrations\202112231826003_ImageFiles.Designer.cs">
+      <DependentUpon>202112231826003_ImageFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112231920085_DummyData.cs" />
+    <Compile Include="Migrations\202112231920085_DummyData.Designer.cs">
+      <DependentUpon>202112231920085_DummyData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112231927200_DummyData1.cs" />
+    <Compile Include="Migrations\202112231927200_DummyData1.Designer.cs">
+      <DependentUpon>202112231927200_DummyData1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112231952462_key.cs" />
+    <Compile Include="Migrations\202112231952462_key.Designer.cs">
+      <DependentUpon>202112231952462_key.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -198,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -224,6 +241,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112231611152_PriceType.resx">
       <DependentUpon>202112231611152_PriceType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112231826003_ImageFiles.resx">
+      <DependentUpon>202112231826003_ImageFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112231920085_DummyData.resx">
+      <DependentUpon>202112231920085_DummyData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112231927200_DummyData1.resx">
+      <DependentUpon>202112231927200_DummyData1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112231952462_key.resx">
+      <DependentUpon>202112231952462_key.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
