@@ -54,15 +54,9 @@ namespace venntest.Controllers
             {
                 HttpPostedFileBase file = Request.Files["ImageData"];
                 product.ImageFile = file;
-                
-                //save the File in the server
-                string fileName = Path.GetFileNameWithoutExtension(product.ImageFile.FileName);
-                string extension = Path.GetExtension(product.ImageFile.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                product.ImagePath = "~/images/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                product.ImageFile.SaveAs(fileName);
 
+                //save the File in the server
+                AddImageToServer(product);
 
                 db.Products.Add(product);
                 db.SaveChanges();
@@ -74,6 +68,16 @@ namespace venntest.Controllers
             }
 
             return View(product);
+        }
+
+        private void AddImageToServer(Product product)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(product.ImageFile.FileName);
+            string extension = Path.GetExtension(product.ImageFile.FileName);
+            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            product.ImagePath = "~/images/" + fileName;
+            fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+            product.ImageFile.SaveAs(fileName);
         }
 
         // GET: Product/Edit/5
@@ -96,10 +100,14 @@ namespace venntest.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Price,Quantity,InStock")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Price,Quantity,InStock,ImagePath")] Product product)
         {
             if (ModelState.IsValid & product.Quantity >= product.InStock)
             {
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                product.ImageFile = file;
+                AddImageToServer(product);
+
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
