@@ -64,7 +64,7 @@ namespace venntest.Controllers
             }
             else
             {
-                if (ModelState.IsValid & product.Quantity < product.InStock) { return Content("The In stock value must be less to the quantity"); }
+                if (ModelState.IsValid & product.Quantity < product.InStock) { return Content(@"<h1>The In stock value must be less to than quantity</h1>"); }
             }
 
             return View(product);
@@ -114,7 +114,7 @@ namespace venntest.Controllers
             }
             else
             {
-                if (ModelState.IsValid & product.Quantity < product.InStock) { return Content("The In stock value must be less to the quantity"); }
+                if (ModelState.IsValid & product.Quantity < product.InStock) { return Content("The In stock value must be less to than quantity"); }
             }
             return View(product);
         }
